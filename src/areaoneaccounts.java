@@ -1,0 +1,598 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author moonc
+ */
+public class areaoneaccounts extends javax.swing.JFrame {
+
+    /**
+     * Creates new form areaoneaccounts
+     */
+    public String str1 = "";
+    public String name1 = "";
+    public int number = 0;
+    public PreparedStatement pst = null;
+    public ResultSet res = null;
+    public Connection conn = null;
+    public areaoneaccounts() {
+        initComponents();
+         jLabel5.setText(name1);
+        update();
+       
+    }
+    
+    public areaoneaccounts(String str,String name,int num)
+    {
+        str1 = str;
+        name1 = name;
+        number = num;
+        initComponents();
+         jLabel5.setText(name1);
+        update();
+    }
+    
+    
+     public Connection setConnection()
+      {
+          Connection Conn = null;
+          if(number == 1)
+          {
+              try{
+                   Conn = Connector.dbConnection1();
+                   return Conn;
+              }catch(Exception e)
+              {
+                  JOptionPane.showMessageDialog(null, "Database 1 can't connect");
+                  return null;
+              }
+          }else if(number == 2)
+          {
+              try{
+                   Conn = Connector.dbConnection2();
+                   return Conn;
+              }catch(Exception e)
+              {
+                  JOptionPane.showMessageDialog(null, "Database 2 can't connect");
+                  return null;
+              }
+          }else if(number==3)
+          {
+               try{
+                   Conn = Connector.dbConnection3();
+                   return Conn;
+              }catch(Exception e)
+              {
+                  JOptionPane.showMessageDialog(null, "Database 3 can't connect");
+                  return null;
+              }
+              
+          }else if(number==4)
+          {
+               try{
+                   Conn = Connector.dbConnection4();
+                   return Conn;
+              }catch(Exception e)
+              {
+                  JOptionPane.showMessageDialog(null, "Database 4 can't connect");
+                  return null;
+              }
+              
+          }else if(number==5)
+          {
+               try{
+                   Conn = Connector.dbConnection5();
+                   return Conn;
+              }catch(Exception e)
+              {
+                  JOptionPane.showMessageDialog(null, "Database 5 can't connect");
+                  return null;
+              }
+              
+          }else if(number==6)
+          {
+               try{
+                   Conn = Connector.dbConnection6();
+                   return Conn;
+              }catch(Exception e)
+              {
+                  JOptionPane.showMessageDialog(null, "Database 6 can't connect");
+                  return null;
+              }
+              
+          }else if(number==7)
+          {
+               try{
+                   Conn = Connector.dbConnection7();
+                   return Conn;
+              }catch(Exception e)
+              {
+                  JOptionPane.showMessageDialog(null, "Database 7 can't connect");
+                  return null;
+              }
+              
+          }else if(number==8)
+          {
+               try{
+                   Conn = Connector.dbConnection8();
+                   return Conn;
+              }catch(Exception e)
+              {
+                  JOptionPane.showMessageDialog(null, "Database 8 can't connect");
+                  return null;
+              }
+              
+          }else{
+              return Conn;
+          }
+          
+      }
+    
+
+    
+     private void update()
+     {    
+        try{
+            conn = setConnection();
+            String sql = "select * from "+ str1;
+            pst = conn.prepareStatement(sql);
+            res = pst.executeQuery();
+            areaonetable.setModel(DbUtils.resultSetToTableModel(res));
+        } catch (SQLException ex) {
+            Logger.getLogger(areaoneaccounts.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(areaoneaccounts.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        find_total_due();
+        find_total_price();
+          
+     }
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jScrollPane1 = new javax.swing.JScrollPane();
+        areaonetable = new javax.swing.JTable();
+        add = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
+        jTextField7 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField8 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        update = new javax.swing.JButton();
+        delete = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        areaonetable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Date", "Memo", "Price", "Paid"
+            }
+        ));
+        areaonetable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                areaonetableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(areaonetable);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(571, 81, 480, 430));
+
+        add.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        add.setText("Add");
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
+        getContentPane().add(add, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 90, -1));
+
+        jPanel1.setBackground(new java.awt.Color(0, 204, 0));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 240, 50));
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 120, -1));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Due :");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 60, 30));
+
+        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField5.setForeground(new java.awt.Color(204, 51, 0));
+        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 180, 30));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Paid Due :");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, -1, 30));
+
+        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField6.setForeground(new java.awt.Color(0, 0, 153));
+        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 180, 30));
+
+        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField7.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 220, 30));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("Total Sell");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 80, 30));
+
+        jTextField8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField8.setForeground(new java.awt.Color(204, 0, 0));
+        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 410, 220, 30));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setText("Total Due");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, 30));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Date :");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 60, 30));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Memo :");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, -1, 30));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Price :");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 60, 30));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("Paid :");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, -1, 30));
+
+        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField4.setForeground(new java.awt.Color(0, 51, 204));
+        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 180, 30));
+
+        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField3.setForeground(new java.awt.Color(0, 0, 204));
+        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 180, 30));
+
+        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField2.setForeground(new java.awt.Color(0, 0, 204));
+        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 180, 30));
+
+        update.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        update.setText("Update");
+        update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateActionPerformed(evt);
+            }
+        });
+        jPanel1.add(update, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 90, -1));
+
+        delete.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        delete.setText("Delete");
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 90, -1));
+
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(0, 0, 204));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 180, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1220, 600));
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void areaonetableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_areaonetableMouseClicked
+        int row = areaonetable.getSelectedRow();
+        String Date = (areaonetable.getModel().getValueAt(row,0).toString());
+        jTextField1.setText(Date);
+        String Memo = (areaonetable.getModel().getValueAt(row,1).toString());
+        jTextField2.setText(Memo);
+        String Price = (areaonetable.getModel().getValueAt(row,2).toString());
+        jTextField3.setText(Price);
+        String Paid = (areaonetable.getModel().getValueAt(row,3).toString());
+        jTextField4.setText(Paid);
+        String Due = (areaonetable.getModel().getValueAt(row,4).toString());
+        jTextField5.setText(Due);
+        
+    }//GEN-LAST:event_areaonetableMouseClicked
+
+    
+    public void find_total_due()
+    {
+          try {
+            int tempDue = 0;
+            conn = setConnection();
+            
+            String sql = "select Due from "+str1;
+            pst = conn.prepareStatement(sql);
+            res = pst.executeQuery();
+            
+            while(res.next())
+            {
+                String temp = res.getString("Due");
+                int t = Integer.parseInt(temp);
+                tempDue = tempDue + t;
+            }
+            
+            String temps = Integer.toString(tempDue);
+            jTextField7.setText(temps);
+        } catch (SQLException ex) {
+            Logger.getLogger(areaoneaccounts.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+        try {
+            pst.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(areaoneaccounts.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public void find_total_price()
+    {
+          try {
+            int tempPrice = 0;
+            conn = setConnection();
+            
+            String sql = "select Price from "+str1;
+            pst = conn.prepareStatement(sql);
+            res = pst.executeQuery();
+            
+            while(res.next())
+            {
+                String temp = res.getString("Price");
+                int t = Integer.parseInt(temp);
+                tempPrice = tempPrice + t;
+            }
+            
+            String temps = Integer.toString(tempPrice);
+            jTextField8.setText(temps);
+        } catch (SQLException ex) {
+            Logger.getLogger(areaoneaccounts.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+        try {
+            pst.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(areaoneaccounts.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+      public void clear()
+      {
+          jTextField1.setText("");
+          jTextField2.setText("");
+          jTextField3.setText("");
+          jTextField4.setText("");
+          jTextField5.setText("");
+          jTextField6.setText("");
+      }
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+        try {
+            String dt = "";
+            dt = jTextField1.getText();
+            String Me = "";
+            Me = jTextField2.getText();
+            String Pr = "";
+            Pr = jTextField3.getText();
+            String Pa = "";
+            Pa = jTextField4.getText();
+            
+            
+            conn = setConnection();
+            String sql = "insert into "+str1+" values (?,?,?,?,?)";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1,dt);
+            pst.setString(2, Me);
+            pst.setString(3, Pr);
+            pst.setString(4, Pa);
+            int Price = Integer.parseInt(Pr);
+            int Paid = Integer.parseInt(Pa);
+            int Due = Price - Paid;
+            String due = Integer.toString(Due);
+            pst.setString(5,due);
+            pst.execute();
+            clear();
+            update();
+        } catch (SQLException ex) {
+            try {
+                conn.close();
+            } catch (SQLException ex1) {
+                Logger.getLogger(areaoneaccounts.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            Logger.getLogger(areaoneaccounts.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+    }//GEN-LAST:event_addActionPerformed
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        try {
+            conn = setConnection();
+            String Me = null;
+            Me = jTextField2.getText();
+            
+            String sql = "delete from "+str1+" where Memo = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1,Me);
+            pst.execute();
+            JOptionPane.showMessageDialog(null,Me);
+          clear();
+            update();
+        } catch (SQLException ex) {
+            try {
+                conn.close();
+            } catch (SQLException ex1) {
+                Logger.getLogger(areaoneaccounts.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            Logger.getLogger(areaoneaccounts.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_deleteActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        setVisible(true);
+        frametwo ftwo = new frametwo(number);
+        ftwo.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+        try {
+            conn = setConnection();
+            String s0="",s1="",s2="",s3="",s4="",s5="";
+            s0 = jTextField1.getText();
+            s1 = jTextField2.getText();
+            s2=jTextField3.getText();
+            s3=jTextField4.getText();
+            s4=jTextField5.getText();
+            s5=jTextField6.getText();
+            
+            int due = Integer.parseInt(s4);
+            int paid_due = Integer.parseInt(s5);
+            
+            due = due - paid_due;
+            
+            String Due = Integer.toString(due);
+
+            String sql = "update "+ str1 +" set Date= '"+s0+"' , Memo = '"+s1+"' , Price = '"+s2+"' , Paid = '"+s3+"' , Due = '"+Due+"' where Memo = '"+s1+"'";
+            pst = conn.prepareStatement(sql);
+            pst.execute();
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+                jTextField6.setText("");
+            update();
+        } catch (SQLException ex) {
+            try {
+                pst.close();
+            } catch (SQLException ex1) {
+                Logger.getLogger(areaoneaccounts.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            Logger.getLogger(areaoneaccounts.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null,"Can't Update");
+        }
+        
+//        try {
+//            pst.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(areaoneaccounts.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }//GEN-LAST:event_updateActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(areaoneaccounts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(areaoneaccounts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(areaoneaccounts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(areaoneaccounts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new areaoneaccounts().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton add;
+    private javax.swing.JTable areaonetable;
+    private javax.swing.JButton delete;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JButton update;
+    // End of variables declaration//GEN-END:variables
+}
